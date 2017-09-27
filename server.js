@@ -2,25 +2,24 @@
 const express = require('express')
 const expressHB = require('express-handlebars')
 const bodyParser = require('body-parser')
-const cheerio = require('cheerio')
 const logger = require('morgan')
-const mongoose = require('mongoose')
-const request = require('request')
+const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
 
-let PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 8080
 
 // Setting up express server
 const app = express()
+
+// Setting up express-sessions and MongoStore
+app.use(session({
+  secret: process.env.SECRET,
+  store: new MongoStore({url: 'mongodb://localhost/news-scraper' }),
+  resave: false,
+  saveUninitialized: true,
+}))
 // Setting up public folder dir
 app.use(express.static('public'))
-
-// Setting up mongoose to use ES6 promises
-// Note to self --> Need to learn more about this
-mongoose.Promise = Promise
-
-// Database configuration
-mongoose.connect('mongodb://localhost/news-scraper');
-const db = mongoose.connection
 
 // Setting up morgan
 app.use(logger('dev'))

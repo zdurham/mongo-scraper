@@ -6,7 +6,6 @@ let ArticleSchema = new Schema({
   title: {
     type: String,
     required: true,
-    unique: true
   },
   summary: {
     type: String,
@@ -16,7 +15,12 @@ let ArticleSchema = new Schema({
     type: String,
     required: true,
   },
-
+  img: {
+    type: String
+  },
+  added: {
+    type: Date
+  },
   note: {
     type: Schema.Types.ObjectId,
     ref: "Note"
