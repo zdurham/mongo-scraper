@@ -38,6 +38,33 @@ module.exports = (app) => {
   })
   // Post registration request
   app.post('/register', (req, res) => {
+    if (req.body.username && req.body.email && req.body.password && req.body.confPassword) {
+      if (req.body.password !== req.body.confPassword) {
+        let err = new Error('Passwords do not match')
+        err.status = 400
+        return next(err)
+      }
 
+      let user = {
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+      };
+
+      User.create(user, (err, user) => {
+        if (err) {
+          return next(err)
+        }
+        else {
+          req.session.userId = user._id
+          return res.redirect('/profile')
+        }
+      })
+    }
+    else {
+      let err = 'All fields are required';
+      err.status = 400;
+      return next(err);
+    }
   })
 }
