@@ -22,10 +22,10 @@ let ArticleSchema = new Schema({
     type: Date,
     default: new Date
   },
-  note: {
+  notes: [{
     type: Schema.Types.ObjectId,
     ref: "Note"
-  }
+  }]
 });
 
 let Article = mongoose.model("Article", ArticleSchema)

@@ -11,8 +11,8 @@ const cheerio = require('cheerio')
 module.exports = (app) => {
   
   // Landing page route
-  app.get('/', (req, res) => {
-    Article.find().sort({added: -1}).exec((err, data) => {
+  app.get('/', (req, res, next) => {
+    Article.find().sort({added: -1}).populate('notes').exec((err, data) => {
       if (err) {
         console.log(err)
       }
@@ -24,7 +24,7 @@ module.exports = (app) => {
 
 
   // Scraping pathway
-  app.get('/scrape', (req, res) => {
+  app.get('/scrape', (req, res, next) => {
     request("https://www.theatlantic.com/latest", (err, res, html) => {
       // HTML is saved as $ selector
       const $ = cheerio.load(html)
@@ -64,9 +64,61 @@ module.exports = (app) => {
     });
     res.redirect('/')
   });
+
+  // Post New Comment Route
+  app.post('/add/note/:id', (req, res) => {
+    let id = req.params.id;
+    User.findOne({'_id': `${res.locals.currentUser}`}, function(err, docs) {
+      if (err) {
+        return err
+      }
+      else {
+        let request = {  
+          author: docs.username,
+          body: req.body.comment
+        }
+        saveNote(request, id, res)
+        res.redirect('/')
+      }
+    })
+  })
+
+  app.post('/delete/note/:id', (req, res) => {
+    Note.findByIdAndRemove(req.params.id, (err, data) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        res.redirect('/')
+      }
+    })
+  })
     
 
+
+  // Helper functions
   // This function saves the article
+
+  const saveNote = (input, id) => {
+    let note = new Note(input)
+
+    note.save((err, doc) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        Article.findOneAndUpdate({'_id': id}, {$push: {'notes': doc._id}}, {new: true})
+          .exec((err, doc) => {
+            if (err) {
+              console.log(err)
+            }
+            else {
+              console.log(doc)
+            }
+        })
+      }
+    })
+  }
   const savePost = (post) => {
     let article = new Article(post)
 

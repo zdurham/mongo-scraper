@@ -25,10 +25,6 @@ const UserSchema = new Schema({
   article: {
     type: Schema.Types.ObjectId,
     ref: 'Article'
-  },
-  note: {
-    type: Schema.Types.ObjectId,
-    ref: "Note"
   }
 });
 
