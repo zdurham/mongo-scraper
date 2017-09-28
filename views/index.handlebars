@@ -7,14 +7,22 @@
 </div>
 <div class='row'>
   <div class='col s12'>
-    <ul class='articles'>Articles</ul>
+    <div class='articles'>Latest Atlantic Articles</ul>
       {{#each articles}}
-        <li class='article'>
-          <p>Title: {{this.title}}</p> 
-          <img src={{this.url}} style='height:100px;width:100px;'>
-          <p>Summary: {{this.summary}}</p>
-          <p>Link: {{this.link}}</p>
-        </li>
+        <div class='card horizontal'>
+          <div class='card-image'>
+            <img src={{this.img}}>
+          </div>
+          <div class='card-stacked'>
+            <div class='card-content'>
+              <div class='card-title'>{{this.title}}</div>
+              <p>{{this.summary}}</p>
+            </div>
+            <div class='card-action'>
+              <a href={{this.link}}>Link</a>
+            </div>
+          </div>
+        </div>
       {{/each}}
   </div>
 </div>

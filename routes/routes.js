@@ -12,6 +12,10 @@ module.exports = (app) => {
   
   // Landing page route
   app.get('/', (req, res) => {
+   res.redirect('/scrape')
+  });
+
+  app.get('/articles', (req, res) => {
     Article.find().sort({added: -1}).exec((err, data) => {
       if (err) {
         console.log(err)
@@ -19,13 +23,13 @@ module.exports = (app) => {
       else {
         res.render('index', {articles: data})
       }
-    });
-  });
+    });  
+  })
 
 
   // Scraping pathway
   app.get('/scrape', (req, res) => {
-    request("https://www.theatlantic.com/latest/", (err, res, html) => {
+    request("https://www.theatlantic.com/latest", (err, res, html) => {
       // HTML is saved as $ selector
       const $ = cheerio.load(html)
 
@@ -39,9 +43,10 @@ module.exports = (app) => {
         // Capturing summary
         post.summary = $(element).find('p').text()
         // capturing URL  
-        post.link = `https://www.theatlantic.com/latest/${$(element).find("a").attr('href')}`
+        post.link = `https://www.theatlantic.com/${$(element).find("a").attr('href')}`
         // Capture img
-        post.img = $(element).find('a').find('figure').find('img').attr('src')
+        post.img = $(element).find('a').find('figure').find('img').attr('data-src')
+        
         post.date = new Date
 
         // Get db info to check for duplicates
@@ -60,22 +65,9 @@ module.exports = (app) => {
         })
       });
     });
-    res.redirect('/')
+    res.redirect('/articles')
   });
-    
 
-
-  // Getting all articles
-  app.get('/articles', (req, res) => {
-    Article.find({}, (err, doc) => {
-      if (err) {
-        console.log(err)
-      }
-      else {
-        res.json(doc)
-      }
-    });
-  });
 
   
 

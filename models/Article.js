@@ -19,7 +19,8 @@ let ArticleSchema = new Schema({
     type: String
   },
   added: {
-    type: Date
+    type: Date,
+    default: new Date
   },
   note: {
     type: Schema.Types.ObjectId,
