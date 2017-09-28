@@ -7,8 +7,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   </head>
   <body>
-    {{{ body }}}
+    <div class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper">
+          <a href="#!" class="brand-logo">Logo</a>
+          <ul class="right hide-on-med-and-down">
+            {{#if !currentUser}}
+              <li><a href="/register">Register</a></li>
+              <li><a href='/login'>Login</li>
+            {{else}}
+              <li><a href='/dashboard'>Dashboard</a></li>
+              <li><a href='/logout'>Logout</a></li>
+            {{/if}}
+            <li><a href='/scrape'>Scrape!</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
 
+    <div class='container'>
+      {{{ body }}}
+    </div>
 
     <!-- Linking scripts -->
     <!-- jQuery -->
