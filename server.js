@@ -6,14 +6,28 @@ const logger = require('morgan')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 
+
 const PORT = process.env.PORT || 8080
 
 // Setting up express server
 const app = express()
 
+// Setting up mongoose
+const mongoose = require('mongoose')
+
+// Setting up mongoose to use ES6 promises
+// Note to self --> Need to learn more about this
+mongoose.Promise = Promise
+
+// Database configuration
+mongoose.connect('mongodb://localhost/news-scraper');
+const db = mongoose.connection
+
+
+
 // Setting up express-sessions and MongoStore
 app.use(session({
-  secret: process.env.SECRET,
+  secret: 'mongo is mongod',
   store: new MongoStore({url: 'mongodb://localhost/news-scraper' }),
   resave: false,
   saveUninitialized: true,
@@ -30,9 +44,28 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.engine('handlebars', expressHB({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars')
 
-// Routes below
-require('./routes/routes.js')(app)
+// Make user info available on all templates
+app.use((req, res, next) => {
+  res.locals.currentUser = req.session.userId
+  next();
+})
 
+
+// General Routes
+require('./routes/routes.js')(app)
+// Authentication Routes
+require('./routes/auth.js')(app)
+
+
+
+// error handler
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
+});
 
 // Starting server
 app.listen(PORT, () => {

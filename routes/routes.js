@@ -6,18 +6,6 @@ const User = require('../models/User.js')
 const request = require('request')
 const cheerio = require('cheerio')
 
-// Setting up mongoose
-const mongoose = require('mongoose')
-
-// Setting up mongoose to use ES6 promises
-// Note to self --> Need to learn more about this
-mongoose.Promise = Promise
-
-// Database configuration
-mongoose.connect('mongodb://localhost/news-scraper');
-const db = mongoose.connection
-
-
 
 // Routes to be exported
 module.exports = (app) => {
@@ -105,3 +93,5 @@ module.exports = (app) => {
     })
   }
 }
+
+
