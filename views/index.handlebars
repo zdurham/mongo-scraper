@@ -10,17 +10,47 @@
     <div class='articles'>Latest Atlantic Articles</ul>
       {{#each articles}}
         <div class='card horizontal'>
-          <div class='card-image'>
-            <img src={{this.img}}>
-          </div>
           <div class='card-stacked'>
             <div class='card-content'>
               <div class='card-title'>{{this.title}}</div>
-              <p>{{this.summary}}</p>
+              <p>{{this.summary}}</p>          
             </div>
             <div class='card-action'>
               <a href={{this.link}}>Link</a>
+              <a class='modal-trigger' data-id={{this._id}} href='#{{this._id}}'>Add Comment</a>
             </div>
+            <div class='card-action'>
+              <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                  <div class="collapsible-header">Comments</div>
+                  <div class="collapsible-body">
+                    {{#if comments}}
+                    <ul class='comments'>
+                      {{#each comments}}
+                        <li>
+                          <p>Author: {{this.author}}</p>
+                          <hr>
+                          <p>{{this.body}}</p>
+                          <p>Posted: {{this.added}}</p>
+                        </li>
+                      {{/each}}
+                    </ul>
+                    {{else}}
+                    <p>There are no comments for this article</p>
+                    {{/if}}
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div id="{{this._id}}" class="modal">
+          <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>A bunch of text</p>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
           </div>
         </div>
       {{/each}}

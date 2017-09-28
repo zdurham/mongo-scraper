@@ -12,10 +12,6 @@ module.exports = (app) => {
   
   // Landing page route
   app.get('/', (req, res) => {
-   res.redirect('/scrape')
-  });
-
-  app.get('/articles', (req, res) => {
     Article.find().sort({added: -1}).exec((err, data) => {
       if (err) {
         console.log(err)
@@ -23,8 +19,8 @@ module.exports = (app) => {
       else {
         res.render('index', {articles: data})
       }
-    });  
-  })
+    });
+  });
 
 
   // Scraping pathway
@@ -44,9 +40,10 @@ module.exports = (app) => {
         post.summary = $(element).find('p').text()
         // capturing URL  
         post.link = `https://www.theatlantic.com/${$(element).find("a").attr('href')}`
+
         // Capture img
         post.img = $(element).find('a').find('figure').find('img').attr('data-src')
-        
+        console.log('IMG SRC', post.img)
         post.date = new Date
 
         // Get db info to check for duplicates
@@ -65,11 +62,9 @@ module.exports = (app) => {
         })
       });
     });
-    res.redirect('/articles')
+    res.redirect('/')
   });
-
-
-  
+    
 
   // This function saves the article
   const savePost = (post) => {
