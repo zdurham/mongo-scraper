@@ -9,68 +9,68 @@
   <div class='col s12'>
     <div class='articles'>Latest Atlantic Articles</ul>
       {{#each articles}}
-        <div class='card horizontal'>
-          <div class='card-stacked'>
-            <div class='card-content'>
-              <div class='card-title'>{{this.title}}</div>
-              <p>{{this.summary}}</p>          
-            </div>
-            <div class='card-action'>
-              <a href={{this.link}}>Link</a>
-              {{!-- {{#if currentUser}} --}}
-              <a class='modal-trigger' data-id={{this._id}} href='#{{this._id}}'>Add Comment</a>
-              {{!-- {{else}}
-                <a class='disabled'>Add Comment</a>          
-              {{/if}} --}}
-            </div>
-            <div class='card-action'>
-              <ul class="collapsible" data-collapsible="accordion">
-                <li>
-                  <div class="collapsible-header">Comments</div>
-                  <div class="collapsible-body">
-                    {{#if notes}}
-                    <ul class='notes'>
-                      {{#each notes}}
-                        <li>
-                          <div class="row">
-                            <div class="col s12 m5">
-                              <div class="card-panel">
-                                 <p>Author: {{this.author}}</p>
-                                 <hr>
-                                 <p>{{this.body}}</p>
-                                 <p>Posted: {{this.added}}</p>
-                                </span>
+        {{#unless this.saved}}
+          <div class='card horizontal'>
+            <div class='card-stacked'>
+              <div class='card-content'>
+                <div class='card-title'>{{this.title}}</div>
+                <p>{{this.summary}}</p>     
+              </div>
+              <div class='card-action'>
+                <a href={{this.link}}>Link</a>
+                
+                <a class='modal-trigger' data-id={{this._id}} href='#{{this._id}}'>Add Comment</a>
+                <a class='save' href='/save/{{this.id}}'>Save Article</a>
+              </div>
+              <div class='card-action'>
+                <ul class="collapsible" data-collapsible="accordion">
+                  <li>
+                    <div class="collapsible-header">Comments</div>
+                    <div class="collapsible-body">
+                      {{#if notes}}
+                      <ul class='notes'>
+                        {{#each notes}}
+                          <li>
+                            <div class="row">
+                              <div class="col s12 m5">
+                                <div class="card-panel">
+                                  <p>Author: {{this.author}}</p>
+                                  <hr>
+                                  <p>{{this.body}}</p>
+                                  <p>Posted: {{this.added}}</p>
+                                  </span>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </li>
-                      {{/each}}
-                    </ul>
-                    {{else}}
-                    <p>There are no comments for this article</p>
-                    {{/if}}
-                  </div>
-                </li>
-              </ul>
+                          </li>
+                        {{/each}}
+                      </ul>
+                      {{else}}
+                      <p>There are no comments for this article</p>
+                      {{/if}}
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-        <div id="{{this._id}}" class="modal">
-          <div class="modal-content">
-            <h4>Add a note!</h4>
-            <form action='add/note/{{this._id}}' method='post'>
-              <div class='row'>
-                <div class='input-field col s12'>
-                  <textarea class='materialize-textarea' name='comment'></textarea>
-                  <label for='comment'>Comment</label>
+          <div id="{{this._id}}" class="modal">
+            <div class="modal-content">
+              <h4>Add a note!</h4>
+              <form action='add/note/{{this._id}}' method='post'>
+                <div class='row'>
+                  <div class='input-field col s12'>
+                    <textarea class='materialize-textarea' name='comment'></textarea>
+                    <label for='comment'>Comment</label>
+                  </div>
+                  <button class='btn add-comment' type='submit' data-id='{{this._id}}'>
+                    Submit
+                  </button>
                 </div>
-                <button class='btn add-comment' type='submit' data-id='{{this._id}}'>
-                  Submit
-                </button>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
-        </div>
+        {{/unless}}
       {{/each}}
   </div>
 </div>

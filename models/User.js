@@ -22,12 +22,11 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  article: {
+  articles: [{
     type: Schema.Types.ObjectId,
     ref: 'Article'
-  }
+  }]
 });
-
 
 UserSchema.statics.authenticate = (email, password, callback) => {
   // Find email to match to input email

@@ -93,6 +93,29 @@ module.exports = (app) => {
       }
     })
   })
+
+  // Route to save articles
+  app.get('/save/:id', (req, res) => {
+    Article.update({'_id': req.params.id}, {$push: {"saved": true}})
+      .exec((err, docs) => {
+        if (err) {
+          console.log(err)
+        }
+        else {
+          console.log(docs)
+        }
+      })
+    User.update({'_id': res.locals.currentUser}, {$push: {'articles': req.params.id}}, {new: true})
+      .exec((err, docs) => {
+        if (err) {
+          console.log(err)
+        }
+        else {
+          console.log(docs)
+        }
+      })
+    res.redirect('/')
+  })
     
 
 
@@ -107,7 +130,7 @@ module.exports = (app) => {
         console.log(err)
       }
       else {
-        Article.findOneAndUpdate({'_id': id}, {$push: {'notes': doc._id}}, {new: true})
+        Article.update({'_id': id}, {$push: {'notes': doc._id}}, {new: true})
           .exec((err, doc) => {
             if (err) {
               console.log(err)

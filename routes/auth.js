@@ -99,12 +99,13 @@ module.exports = (app) => {
   })
 
   app.get('/dashboard', reqLogin, (req, res, next) => {
-    User.findById(req.session.userId).exec((err, user) => {
+    User.findById(req.session.userId).populate('articles').exec((err, user) => {
       if (err) {
         return next(err)
       }
       else {
-        return res.render('dashboard', {profile: user})
+        console.log('USER', user)
+        return res.render('dashboard', {profile: user, articles: user.articles})
       }
     }) 
   })
