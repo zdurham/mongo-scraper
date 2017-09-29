@@ -58,14 +58,14 @@ require('./routes/routes.js')(app)
 require('./routes/auth.js')(app)
 
 
-// error handler
-// app.use(function(err, req, res, next) {
-//   res.status(err.status || 500);
-//   res.render('error', {
-//     message: err.message,
-//     error: {}
-//   });
-// });
+error handler
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
+});
 
 // Starting server
 app.listen(PORT, () => {
