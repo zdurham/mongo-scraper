@@ -78,18 +78,18 @@ module.exports = (app) => {
           body: req.body.comment
         }
         saveNote(request, id, res)
-        res.redirect('/')
+        res.redirect('back')
       }
     })
   })
 
-  app.post('/delete/note/:id', (req, res) => {
+  app.get('/delete/note/:id', (req, res) => {
     Note.remove({'_id': req.params.id}).exec((err, data) => {
       if (err) {
         console.log(err)
       }
       else {
-        res.redirect('/')
+        res.redirect('back')
       }
     })
   })
@@ -116,7 +116,7 @@ module.exports = (app) => {
           console.log(docs)
         }
       })
-    res.redirect('/')
+    res.redirect('back')
   })
 
   // Route to remove saved articles

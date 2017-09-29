@@ -5,6 +5,10 @@
     <title>Sail the Atlantic!</title>
     <!-- Linking Materialize CSS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <!-- Materialize Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Linking my CSS --> 
+    <link rel='stylesheet' href='css/style.css'>
   </head>
   <body>
     <div class="navbar-fixed">
@@ -12,14 +16,15 @@
         <div class="nav-wrapper">
           <a href="#!" class="brand-logo">The Atlantic News Scraper</a>
           <ul class="right hide-on-med-and-down">
+            <li><a href='/'>Articles</a></li>
+            <li><a href='/scrape'>Scrape!</a></li>
             {{#if currentUser}}
               <li><a href='/dashboard'>Dashboard</a></li>
               <li><a href='/logout'>Logout</a></li>
             {{else}}
               <li><a href="/register">Register</a></li>
-              <li><a href='/login'>Login</li>
+              <li><a href='/login'>Login</a></li>
             {{/if}}
-            <li><a href='/scrape'>Scrape!</a></li>
           </ul>
         </div>
       </nav>

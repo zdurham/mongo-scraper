@@ -1,0 +1,54 @@
+/* General Styles */
+body {
+  background-color: #e3f2fd;
+}
+
+nav {
+  background-color: #0d47a1;
+}
+
+
+/* Buttons */
+button,
+.btn {
+  border-radius: 25px !important;
+  border: 2px solid #0d47a1 !important;
+  background-color: white;
+  color: #0d47a1; 
+}
+
+button:hover,
+.btn:hover {
+  background-color: #0d47a1 !important;
+  color: #fff176 !important;
+  border: 2px solid #fff176 !important;
+}
+
+/* Cards */
+.card-content {
+  background-color: #0d47a1;
+  color: white;
+}
+
+.card-title {
+  color: #fff176 ;
+}
+
+.notes /* refers to area around note section */ {
+  padding: 0 !important;
+}
+
+.card-action a {
+  color: #ff8f00 !important
+}
+/* Collapsibles */
+.collapsible-header {
+  background-color: #0d47a1;
+  color: #fff176
+}
+
+.collapsible {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
