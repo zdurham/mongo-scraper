@@ -1,6 +1,7 @@
 /* General Styles */
 body {
-  background-color: #e3f2fd;
+  background-color: #b3e5fc;
+  background-image: url('../img/black-thread.png')
 }
 
 nav {

@@ -44,6 +44,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.engine('handlebars', expressHB({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars')
 
+
 // Make user info available on all templates
 app.use((req, res, next) => {
   res.locals.currentUser = req.session.userId

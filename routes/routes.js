@@ -17,7 +17,7 @@ module.exports = (app) => {
         console.log(err)
       }
       else {
-        res.render('index', {articles: data})
+        res.render('index', {articles: data, user: res.locals.currentUser ? res.locals.currentUser : false})
       }
     });
   });
@@ -25,7 +25,7 @@ module.exports = (app) => {
 
   // Scraping pathway
   app.get('/scrape', (req, res, next) => {
-    request("https://www.theatlantic.com/latest", (err, res, html) => {
+    request("https://www.theatlantic.com/latest", (err, response, html) => {
       // HTML is saved as $ selector
       const $ = cheerio.load(html)
 
@@ -61,8 +61,8 @@ module.exports = (app) => {
           }
         })
       });
+      res.redirect('back')
     });
-    res.redirect('/')
   });
 
   // Post New Comment Route
