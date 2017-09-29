@@ -12,6 +12,7 @@
   </div>
   <div class='col s12 m8'>
     <div class='articles'></div>
+    {{#if articles}}
       {{#each articles}}
         <div class='card horizontal'>
           <div class='card-stacked'>
@@ -76,5 +77,10 @@
           </div>
         </div>
       {{/each}}
+    {{else}}
+      <div class='card-panel'>
+        <p>You haven't saved any articles.</p>
+      </div>
+    {{/if}}
   </div>
 </div>
