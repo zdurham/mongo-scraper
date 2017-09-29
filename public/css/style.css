@@ -8,18 +8,31 @@ nav {
   background-color: #0d47a1;
 }
 
+.material-icons{
+  display: inline-flex !important;
+  vertical-align: top !important;
+}
+
+/* to fix overlay issue with collapsible menu option */
+#sidenav-overlay { z-index: 1; }
 
 /* Buttons */
 button,
 .btn {
   border-radius: 25px !important;
-  border: 2px solid #0d47a1 !important;
-  background-color: white;
-  color: #0d47a1; 
+  border: 2px solid white !important;
+  background-color: #0d47a1 !important;
+  color: white !important; 
+}
+
+a.btn.delete {
+  background-color: red !important;
+  color: white !important;
 }
 
 button:hover,
-.btn:hover {
+.btn:hover,
+.btn[type=submit].hover {
   background-color: #0d47a1 !important;
   color: #fff176 !important;
   border: 2px solid #fff176 !important;
@@ -42,6 +55,15 @@ button:hover,
 .card-action a {
   color: #ff8f00 !important
 }
+
+.card-action a.disabled {
+  color: #ddd !important
+}
+
+.login-title {
+  color: #0d47a1;
+  text-align: center
+}
 /* Collapsibles */
 .collapsible-header {
   background-color: #0d47a1;
@@ -51,5 +73,42 @@ button:hover,
 .collapsible {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
+}
+
+/* Form color adjustments */
+/* label color */
+.input-field label {
+  color: white !important;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label,
+.input-field input[type=email]:focus + label,
+.input-field input[type=password]:focus + label {
+  color: white !important;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus,
+.input-field input[type=email]:focus,
+.input-field input[type=password]:focus {
+  border-bottom: 1px solid white !important;
+  box-shadow: 0 1px 0 0 white !important;
+}
+/* valid color */
+.input-field input[type=text].valid,
+.input-field input[type=email].valid,
+.input-field input[type=password].valid {
+  border-bottom: 1px solid white !important;
+  box-shadow: 0 1px 0 0 white !important;
+}
+/* invalid color */
+.input-field input[type=text].invalid,
+.input-field input[type=email].invalid,
+.input-field input[type=password].invalid {
+  border-bottom: 1px solid red !important;
+  box-shadow: 0 1px 0 0 red !important;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+  color: white !important;
 }
 
