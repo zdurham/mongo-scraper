@@ -84,7 +84,7 @@ module.exports = (app) => {
   })
 
   app.post('/delete/note/:id', (req, res) => {
-    Note.findByIdAndRemove(req.params.id, (err, data) => {
+    Note.remove({'_id': req.params.id}).exec((err, data) => {
       if (err) {
         console.log(err)
       }
@@ -94,9 +94,11 @@ module.exports = (app) => {
     })
   })
 
+  
+
   // Route to save articles
   app.get('/save/:id', (req, res) => {
-    Article.update({'_id': req.params.id}, {$push: {"saved": true}})
+    Article.update({'_id': req.params.id}, {$set: {"saved": true}})
       .exec((err, docs) => {
         if (err) {
           console.log(err)
@@ -115,6 +117,29 @@ module.exports = (app) => {
         }
       })
     res.redirect('/')
+  })
+
+  // Route to remove saved articles
+  app.get('/unsave/:id', (req, res) => {
+    Article.update({'_id': req.params.id}, {$set: {'saved': false}})
+      .exec((err, docs) => {
+        if (err) {
+          console.log(err)
+        }
+        else {
+          console.log(docs)
+        }
+      })
+    User.update({$pull: {'articles': req.params.id}})
+      .exec((err, docs) => {
+        if (err) {
+          console.log(err)
+        }
+        else {
+          console.log(docs)
+        }
+      })
+      res.redirect('/dashboard')
   })
     
 
