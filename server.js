@@ -28,7 +28,7 @@ const db = mongoose.connection
 // Setting up express-sessions and MongoStore
 app.use(session({
   secret: 'mongo is mongod',
-  store: new MongoStore({url: 'mongodb://localhost/news-scraper' }),
+  store: new MongoStore({url: process.env.MONGODB_URI }),
   resave: false,
   saveUninitialized: true,
 }))
