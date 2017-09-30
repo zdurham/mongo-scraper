@@ -1,11 +1,11 @@
 // Set up dependencies
-const express = require('express')
-const expressHB = require('express-handlebars')
-const bodyParser = require('body-parser')
-const logger = require('morgan')
-const session = require('express-session')
-const MongoStore = require('connect-mongo')(session)
-
+const express = require('express');
+const expressHB = require('express-handlebars');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const helpers = require('handlebars-helpers')();
 
 const PORT = process.env.PORT || 8080
 
@@ -60,13 +60,13 @@ require('./routes/auth.js')(app)
 
 
 
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
-});
+// app.use(function(err, req, res, next) {
+//   res.status(err.status || 500);
+//   res.render('error', {
+//     message: err.message,
+//     error: {}
+//   });
+// });
 
 // Starting server
 app.listen(PORT, () => {

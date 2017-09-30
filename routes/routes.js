@@ -17,7 +17,15 @@ module.exports = (app) => {
         console.log(err)
       }
       else {
-        res.render('index', {articles: data})
+        let articles = data
+        User.findOne({'_id': res.locals.currentUser}).exec((err, user) => {
+          if (err) {
+            console.log(err)
+          }
+          else {
+            res.render('index', {articles: articles, user: user})
+          }
+        })
       }
     });
   });
