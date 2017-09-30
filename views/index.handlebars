@@ -4,7 +4,6 @@
     {{#if articles}}
       <div class='articles'>
         {{#each articles}}
-          
             <div class='card horizontal'>
               <div class='card-stacked'>
                 <div class='card-content'>
@@ -15,8 +14,8 @@
                   <a href={{this.link}}>Link</a>
                   {{#if ../currentUser}}
                     <a class='modal-trigger' data-id={{this._id}} href='#{{this._id}}'>Add Comment</a>
-                    {{#contains ../user.articles this.id}}
-                      <p>Saved</p>
+                    {{#contains this.users ../currentUser}}
+                      <a class='disabled saved'>Saved!</a>
                     {{else}}
                       <a class='save' href='/save/{{this.id}}'>Save Article</a>
                     {{/contains}}
@@ -76,7 +75,6 @@
                 </form>
               </div>
             </div>
-          
         {{/each}}
     {{else}}
       <div class='card-panel'>
