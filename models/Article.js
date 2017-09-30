@@ -26,6 +26,10 @@ let ArticleSchema = new Schema({
     type: Boolean,
     default: false
   },
+  users: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }],
   notes: [{
     type: Schema.Types.ObjectId,
     ref: "Note"

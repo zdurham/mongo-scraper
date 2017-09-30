@@ -17,7 +17,7 @@ module.exports = (app) => {
         console.log(err)
       }
       else {
-        res.render('index', {articles: data, user: res.locals.currentUser ? res.locals.currentUser : false})
+        res.render('index', {articles: data})
       }
     });
   });
@@ -98,15 +98,24 @@ module.exports = (app) => {
 
   // Route to save articles
   app.get('/save/:id', (req, res) => {
-    Article.update({'_id': req.params.id}, {$set: {"saved": true}})
-      .exec((err, docs) => {
-        if (err) {
-          console.log(err)
-        }
-        else {
-          console.log(docs)
-        }
-      })
+    Article.update({'_id': req.params.id}, {$set: {'saved': true}})
+    .exec((err, docs) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        console.log(docs)
+      }
+    })
+    Article.update({'_id': req.params.id}, {$push: {'users': res.locals.currentUser}}, {new: true})
+    .exec((err, docs) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        console.log(docs) 
+      }
+    })
     User.update({'_id': res.locals.currentUser}, {$push: {'articles': req.params.id}}, {new: true})
       .exec((err, docs) => {
         if (err) {
@@ -130,7 +139,16 @@ module.exports = (app) => {
           console.log(docs)
         }
       })
-    User.update({$pull: {'articles': req.params.id}})
+    Article.update({'_id': req.params.id}, {$pull: {'users': res.locals.currentUser}})
+    .exec((err, docs) => {
+      if (err) {
+        console.log(err)
+      }
+      else {
+        console.log(docs) 
+      }
+    })
+    User.update({'_id': res.locals.currentUser}, {$pull: {'articles': req.params.id}})
       .exec((err, docs) => {
         if (err) {
           console.log(err)

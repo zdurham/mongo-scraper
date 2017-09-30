@@ -20,7 +20,7 @@ const mongoose = require('mongoose')
 mongoose.Promise = Promise
 
 // Database configuration
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect('mongodb://localhost/mongo-scraper');
 const db = mongoose.connection
 
 
@@ -43,6 +43,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 // Setting up handlebars
 app.engine('handlebars', expressHB({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars')
+
 
 
 // Make user info available on all templates
