@@ -1,7 +1,8 @@
 /* General Styles */
 body {
   background-color: #b3e5fc;
-  background-image: url('../img/black-thread.png')
+  background-image: url('../img/black-thread.png');
+  font-family: 'Raleway', sans-serif;
 }
 
 nav {
@@ -11,6 +12,17 @@ nav {
 .material-icons{
   display: inline-flex !important;
   vertical-align: top !important;
+}
+
+
+/* Logo */
+.brand-logo {
+  margin-left: 20px;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+.card-title {
+  font-family: 'Roboto', sans-serif !important;
 }
 
 /* to fix overlay issue with collapsible menu option */
