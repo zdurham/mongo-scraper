@@ -20,7 +20,7 @@ const mongoose = require('mongoose')
 mongoose.Promise = Promise
 
 // Database configuration
-mongoose.connect('mongodb://localhost/mongo-scraper');
+mongoose.connect(process.env.MONGODB_URI);
 const db = mongoose.connection
 
 
