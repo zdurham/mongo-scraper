@@ -70,7 +70,7 @@ app.use(function(err, req, res, next) {
 
 // Starting server
 app.listen(PORT, () => {
-  console.log("App running on port 8080!")
+  console.log(`App running on port ${PORT}!`)
 })
 
 
