@@ -1,12 +1,12 @@
 /* General Styles */
 body {
-  background-color: #f0c584;
+  background-color: #ccc;
   background-image: url('../img/asfalt-dark.png');
   font-family: 'Raleway', sans-serif;
 }
 
 nav {
-  background-color: #0d47a1;
+  background-color: rgb(153, 186, 221)
 }
 
 .material-icons{
@@ -34,7 +34,7 @@ button,
 .btn {
   border-radius: 25px !important;
   border: 2px solid white !important;
-  background-color: #0d47a1 !important;
+  background-color: rgb(153, 186, 221) !important;
   color: white !important; 
 }
 
@@ -46,19 +46,19 @@ a.btn.delete {
 button:hover,
 .btn:hover,
 .btn[type=submit].hover {
-  background-color: #0d47a1 !important;
-  color: #fff176 !important;
-  border: 2px solid #fff176 !important;
+  background-color: rgb(153, 186, 221) !important;
+  color: #000080 !important;
+  border: 2px solid #000080 !important;
 }
 
 /* Cards */
 .card-content {
-  background-color: #0d47a1;
+  background-color: rgb(153, 186, 221);
   color: white;
 }
 
 .card-title {
-  color: #fff176 ;
+  color: #000080 ;
 }
 
 .notes /* refers to area around note section */ {
@@ -74,13 +74,13 @@ button:hover,
 }
 
 .login-title {
-  color: #0d47a1;
+  color: rgb(153, 186, 221);
   text-align: center
 }
 /* Collapsibles */
 .collapsible-header {
-  background-color: #0d47a1;
-  color: #fff176
+  background-color: rgb(153, 186, 221);
+  color: #000080
 }
 
 .collapsible {
